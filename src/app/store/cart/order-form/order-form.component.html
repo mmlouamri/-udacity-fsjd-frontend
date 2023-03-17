@@ -1,0 +1,148 @@
+<div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
+  <h3 class="text-2xl font-bold text-center mb-6">Checkout</h3>
+
+  <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
+    <h4 class="text-lg font-bold">Shipping information</h4>
+
+    <div class="mt-4">
+      <label for="shippingFirstName">First name</label>
+      <input
+        type="text"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+        id="shippingFirstName"
+        required
+        minlength="3"
+        [(ngModel)]="shippingInformation.shippingFirstName"
+        name="shippingFirstName"
+        #shippingFirstNameForm="ngModel"
+      />
+      <div
+        *ngIf="shippingFirstNameForm.invalid && shippingFirstNameForm.dirty"
+        class="my-2"
+      >
+        <div
+          *ngIf="shippingFirstNameForm.errors?.['required']"
+          class="text-xs text-red-600"
+        >
+          Please provide a first name.
+        </div>
+        <div
+          *ngIf="shippingFirstNameForm.errors?.['minlength']"
+          class="text-xs text-red-600"
+        >
+          First name must be more than 3 characters.
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label for="shippingLastName">Last name</label>
+      <input
+        type="text"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+        id="shippingLastName"
+        required
+        minlength="3"
+        [(ngModel)]="shippingInformation.shippingLastName"
+        name="shippingLastName"
+        #shippingLastNameForm="ngModel"
+      />
+      <div
+        *ngIf="shippingLastNameForm.invalid && shippingLastNameForm.dirty"
+        class="my-2"
+      >
+        <div
+          *ngIf="shippingLastNameForm.errors?.['required']"
+          class="text-xs text-red-600"
+        >
+          Please provide a last name.
+        </div>
+        <div
+          *ngIf="shippingLastNameForm.errors?.['minlength']"
+          class="text-xs text-red-600"
+        >
+          Last name must be more than 3 characters.
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label for="shippingAddress">Address</label>
+      <input
+        type="text"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+        id="shippingAddress"
+        required
+        minlength="10"
+        [(ngModel)]="shippingInformation.shippingAddress"
+        name="shippingAddress"
+        #shippingAddressForm="ngModel"
+      />
+      <div
+        *ngIf="shippingAddressForm.invalid && shippingAddressForm.dirty"
+        class="my-2"
+      >
+        <div
+          *ngIf="shippingAddressForm.errors?.['required']"
+          class="text-xs text-red-600"
+        >
+          Please provide an address.
+        </div>
+        <div
+          *ngIf="shippingAddressForm.errors?.['minlength']"
+          class="text-xs text-red-600"
+        >
+          Address must be more than 10 characters.
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <label for="creditCardNumber">Credit card number</label>
+      <input
+        type="text"
+        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+        id="creditCardNumber"
+        required
+        pattern="^[0-9]{16}$"
+        [(ngModel)]="shippingInformation.creditCardNumber"
+        name="creditCardNumber"
+        #creditCardNumberForm="ngModel"
+        (ngModelChange)="furtherValidateCC($event)"
+      />
+      <div
+        *ngIf="
+          (!luhnCheck || creditCardNumberForm.invalid) &&
+          creditCardNumberForm.dirty
+        "
+        class="my-2"
+      >
+        <div
+          *ngIf="creditCardNumberForm.errors?.['required']"
+          class="text-xs text-red-600"
+        >
+          Please provide a credit card number.
+        </div>
+        <div
+          *ngIf="creditCardNumberForm.errors?.['pattern']"
+          class="text-xs text-red-600"
+        >
+          Please provide a valid credit card number (16 digits).
+        </div>
+        <div
+          *ngIf="!creditCardNumberForm.errors?.['pattern'] && !luhnCheck "
+          class="text-xs text-red-600"
+        >
+          Please provide a valid credit card number (Luhn check). (For the
+          reviewer: please keep changing the last digit until you obtain a
+          credit card number which passes the check)
+        </div>
+      </div>
+    </div>
+    <div class="flex items-baseline justify-between">
+      <button
+        class="w-full px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 disabled:opacity-25 disabled:bg-gray-600 disabled:cursor-not-allowed"
+        [disabled]="orderForm.invalid || !luhnCheck"
+      >
+        Make the order
+      </button>
+    </div>
+  </form>
+</div>

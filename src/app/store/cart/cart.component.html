@@ -1,0 +1,55 @@
+<div class="flex max-w-screen-lg mx-auto flex-wrap gap-4 my-6 flex-col">
+  <div>
+    <h2 class="text-2xl mb-4">Items</h2>
+    <table class="w-full table-auto">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th class="border border-slate-300 p-2 text-center">Quantity</th>
+          <th class="border border-slate-300 p-2 text-center">Name</th>
+          <th class="border border-slate-300 p-2 text-center">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <td class="border border-slate-300 p-2 text-center">
+            <span
+              class="text-lg font-bold text-blue-600 cursor-pointer"
+              (click)="addQuantity(item.id, item.quantity)"
+              >+</span
+            >
+          </td>
+          <td class="border border-slate-300 p-2 text-center">
+            <span
+              class="text-lg font-bold text-blue-600 cursor-pointer"
+              (click)="subQuantity(item.id, item.quantity)"
+              >-</span
+            >
+          </td>
+
+          <td class="border border-slate-300 p-2 text-center">
+            {{ item.quantity }}
+          </td>
+          <td class="border border-slate-300 p-2 text-center">
+            {{ item.product.name }}
+          </td>
+          <td class="border border-slate-300 p-2 text-right">
+            {{ item.totalPrice }}$
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="border border-slate-300 p-2 text-right">
+            <strong>{{ totalBill | number : ".2-2" }}$</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-order-form></app-order-form>
+</div>

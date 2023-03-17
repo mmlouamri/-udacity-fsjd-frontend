@@ -1,0 +1,39 @@
+<ul class="bg-gray-300 flex justify-around shadow-lg mb-4">
+  <li class="flex-1 hover:bg-blue-300">
+    <a
+      routerLink="/store"
+      class="w-full block p-3 text-center text-sm font-bold text-blue-600"
+      >Products</a
+    >
+  </li>
+  <li class="flex-1 hover:bg-blue-300">
+    <a
+      routerLink="cart"
+      class="w-full block p-3 text-center text-sm font-bold text-blue-600"
+      >Cart</a
+    >
+  </li>
+  <li class="flex-1 hover:bg-blue-300">
+    <a
+      routerLink="history"
+      class="w-full block p-3 text-center text-sm font-bold text-blue-600"
+      >Orders History</a
+    >
+  </li>
+  <li class="flex-1 hover:bg-blue-300">
+    <a
+      routerLink="profile"
+      class="w-full block p-3 text-center text-sm font-bold text-blue-600"
+      >Profile</a
+    >
+  </li>
+  <li class="flex-1 hover:bg-blue-300">
+    <a
+      href="#"
+      (click)="logout()"
+      class="w-full block p-3 text-center text-sm font-bold text-blue-600"
+      >Logout</a
+    >
+  </li>
+</ul>
+<router-outlet></router-outlet>

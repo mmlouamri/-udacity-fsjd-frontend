@@ -1,0 +1,13 @@
+<div class="my-5 p-3 rounded shadow border border-slate-300">
+  <h3 class="text-lg font-bold">
+    Order made on: {{ order.createdAt | date : "medium" }}
+  </h3>
+  <ul>
+    <li *ngFor="let item of order.orderItems">
+      {{ item.name }}
+    </li>
+  </ul>
+  <p class="text-right">
+    Total: <strong>{{ order.totalPrice }}$</strong>
+  </p>
+</div>

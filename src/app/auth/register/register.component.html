@@ -1,0 +1,71 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
+    <h3 class="text-2xl font-bold text-center">Register</h3>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="mt-4">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+          id="email"
+          required
+          email
+          [(ngModel)]="registerModel.email"
+          name="email"
+          #registerEmail="ngModel"
+        />
+        <div *ngIf="registerEmail.invalid && registerEmail.dirty" class="my-2">
+          <div
+            *ngIf="registerEmail.errors?.['required'] || registerEmail.errors?.['email']"
+            class="text-xs text-red-600"
+          >
+            Please provide a valid e-mail address.
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+          id="password"
+          required
+          minlength="6"
+          [(ngModel)]="registerModel.password"
+          name="password"
+          #registerPassword="ngModel"
+        />
+        <div
+          *ngIf="registerPassword.invalid && registerPassword.dirty"
+          class="my-2"
+        >
+          <div
+            *ngIf="registerPassword.errors?.['required']"
+            class="text-xs text-red-600"
+          >
+            Please provide a password.
+          </div>
+          <div
+            *ngIf="registerPassword.errors?.['minlength']"
+            class="text-xs text-red-600"
+          >
+            The password should be longer than 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="flex items-baseline justify-between">
+        <button
+          class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 disabled:opacity-25 disabled:bg-gray-600 disabled:cursor-not-allowed"
+          [disabled]="registerForm.invalid"
+        >
+          Register
+        </button>
+        <a
+          routerLink="/auth/login"
+          class="text-sm text-blue-600 hover:underline"
+          >Already have an account?</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
